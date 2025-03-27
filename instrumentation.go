@@ -25,6 +25,7 @@ import (
 
 	"go.opentelemetry.io/auto/internal/pkg/instrumentation"
 	dbSql "go.opentelemetry.io/auto/internal/pkg/instrumentation/bpf/database/sql"
+	"go.opentelemetry.io/auto/internal/pkg/instrumentation/bpf/github.com/gocql/gocql"
 	kafkaConsumer "go.opentelemetry.io/auto/internal/pkg/instrumentation/bpf/github.com/segmentio/kafka-go/consumer"
 	kafkaProducer "go.opentelemetry.io/auto/internal/pkg/instrumentation/bpf/github.com/segmentio/kafka-go/producer"
 	autosdk "go.opentelemetry.io/auto/internal/pkg/instrumentation/bpf/go.opentelemetry.io/auto/sdk"
@@ -88,6 +89,7 @@ func NewInstrumentation(ctx context.Context, opts ...InstrumentationOption) (*In
 		dbSql.New(c.logger, Version()),
 		kafkaProducer.New(c.logger, Version()),
 		kafkaConsumer.New(c.logger, Version()),
+		gocql.New(c.logger, Version()),
 		autosdk.New(c.logger),
 	}
 
